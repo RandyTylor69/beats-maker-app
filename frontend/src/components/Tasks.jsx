@@ -4,8 +4,13 @@ export default function Tasks(props) {
   return (
     <section className="tasks-container">
       <form className="slider-form" onSubmit={(e) => props.toggleStart(e)}>
-        <button className="big-button" type="submit">
+        <button 
+        className="big-button" 
+        type="submit"
+        disabled={props.btnAvail? false : true}
+        >
           {props.isStart? "Pause" : "Start"}
+        
         </button>
         <input
           name="slider"

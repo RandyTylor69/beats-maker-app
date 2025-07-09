@@ -105,6 +105,11 @@ body {
 .tasks-container .slider-form .big-button:hover {
   font-weight: 400;
 }
+.tasks-container .slider-form .big-button:disabled {
+  cursor: no-drop;
+  opacity: 0.3;
+  color: black;
+}
 .tasks-container .slider-form .slider {
   -webkit-appearance: none;
   background-color: black;

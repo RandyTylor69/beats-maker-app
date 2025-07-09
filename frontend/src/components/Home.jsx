@@ -7,6 +7,7 @@ export default function Home() {
   // vars for Tasks.jsx
   const [isStart, setIsStart] = React.useState(false);
   const [sliderVolume, setSliderVolume] = React.useState(30);
+  const [btnAvail, setBtnAvail] = React.useState(true)
 
   // vars for Pads.jssx
   const [padsData, setPadsData] = React.useState(pads);
@@ -68,6 +69,15 @@ export default function Home() {
 
     // change "start" to "pause" or vise versa
     setIsStart((prev) => !prev);
+
+    // the button will be disabled until the loop is finished.
+    // loop finish = all pads' scales are 1
+    setBtnAvail(false)
+    setTimeout(()=>{
+      setBtnAvail(true)
+    }, 2000)
+
+ 
   }
 
   React.useEffect(() => {
@@ -102,6 +112,7 @@ export default function Home() {
           sliderVolume={sliderVolume}
           setSliderVolume={setSliderVolume}
           isStart={isStart}
+          btnAvail={btnAvail}
         />
       </section>
     </div>
