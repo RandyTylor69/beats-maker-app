@@ -1,33 +1,33 @@
 import Pad from "./Pad";
-import { pads } from "../data";
-import React from "react";
 
-export default function Pads() {
-    const [padsData, setPadsData]=React.useState(pads)
+export default function Pads(props) {
+  // turns on / off the pads
+  function toggle(id) {
+    props.setPadsData((prevArray) =>
+      prevArray.map((item) =>
+        item.id === id ? { ...item, on: !item.on } : item
+      )
+    );
+  }
 
-    function toggle(id){
-       setPadsData(prevArray=>prevArray.map(item=>(
-        item.id === id? {...item, on:!item.on}: item
-       )))
-    }
-
-    console.log(padsData)
-    
-  const padsMapped = padsData.map((pad) => {
-    return <Pad 
+  const padsMapped = props.padsData.map((pad) => {
+    return (
+      <Pad
         key={pad.id}
         on={pad.on}
         color={pad.color}
         id={pad.id}
         type={pad.type}
-
+        scale={pad.scale}
         toggle={toggle}
-    />;
+        activate={props.activate}
+      />
+    );
   });
 
   return (
     <section className="pad-area">
-        {/** drop-down menus */}
+      {/** drop-down menus */}
       <div className="pads-description">
         <div className="dropdown-wrapper">
           <select name="hat">

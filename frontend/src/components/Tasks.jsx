@@ -1,31 +1,25 @@
-import React from "react"
-import { Link } from "react-router-dom"
 
-export default function Tasks(){
-    const [sliderVolume, setSliderVolume] = React.useState(30)
-    function handleSubmit(e){
-        
-    }
-    return(
-        <section className="tasks-container"> 
-            <form className="slider-form">
-                <button 
-                    className="big-button"
-                    type="submit"
-                >Start</button>
-                <input
-                 type="range" 
-                 min="0"
-                 max="100"
-                 value={sliderVolume}
-                 onChange={(e)=>setSliderVolume(e.target.value)}
-                className="slider"
-                onSubmit={(e)=>handleSubmit()}
-                 >
-                </input>
-            </form>
-            <button className="small-button">Record</button>
-            <button className="small-button">My Beats</button>
-        </section>
-    )
+
+export default function Tasks(props) {
+  return (
+    <section className="tasks-container">
+      <form className="slider-form" onSubmit={(e) => props.toggleStart(e)}>
+        <button className="big-button" type="submit">
+          {props.isStart? "Pause" : "Start"}
+        </button>
+        <input
+          name="slider"
+          type="range"
+          min="0"
+          max="100"
+          value={props.sliderVolume}
+          onChange={(e) => props.setSliderVolume(e.target.value)}
+          className="slider"
+          
+        ></input>
+      </form>
+      <button className="small-button">Record</button>
+      <button className="small-button">My Beats</button>
+    </section>
+  );
 }
