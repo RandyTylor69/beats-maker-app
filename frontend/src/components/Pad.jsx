@@ -1,7 +1,8 @@
 
 export default function Pad(props){
     const styles = {
-        backgroundColor: props.on? props.color:"white"
+        backgroundColor: props.color,
+        opacity: props.on? 1:0.1
     }
 
     return(
