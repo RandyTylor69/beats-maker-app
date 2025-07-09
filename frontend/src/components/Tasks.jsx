@@ -3,10 +3,16 @@ import { Link } from "react-router-dom"
 
 export default function Tasks(){
     const [sliderVolume, setSliderVolume] = React.useState(30)
+    function handleSubmit(e){
+        
+    }
     return(
-        <section className="tasks-container">
-            <h1>Start</h1>
-            <div className="slider-container">
+        <section className="tasks-container"> 
+            <form className="slider-form">
+                <button 
+                    className="big-button"
+                    type="submit"
+                >Start</button>
                 <input
                  type="range" 
                  min="0"
@@ -14,11 +20,12 @@ export default function Tasks(){
                  value={sliderVolume}
                  onChange={(e)=>setSliderVolume(e.target.value)}
                 className="slider"
+                onSubmit={(e)=>handleSubmit()}
                  >
                 </input>
-            </div>
-            <h3>Record</h3>
-            <h3>My Beats</h3>
+            </form>
+            <button className="small-button">Record</button>
+            <button className="small-button">My Beats</button>
         </section>
     )
 }

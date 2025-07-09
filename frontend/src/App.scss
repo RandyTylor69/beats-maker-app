@@ -94,12 +94,26 @@ body{
     font-family: "Inter", sans-serif;
     color: black;
     gap: 1rem;
-    h1{
-        font-weight: 400;
-        
-    }
-    .slider-container{
+   
+    .slider-form{
         margin: 0.8rem 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        .big-button{
+            font-family: "Inter", sans-serif;
+            background:none;
+            border: none;
+            font-size: 2rem;
+            font-weight: 300;
+            cursor: pointer;
+            display: flex;
+            text-align: left;
+            transition: 0.3s;
+            &:hover{
+                font-weight: 400;
+            }
+        }
         .slider{
             -webkit-appearance: none;
             background-color: black;
@@ -116,7 +130,12 @@ body{
         }
         
     }
-    h3{
+   .small-button {
+        background: none;
+        font-family: "Inter", sans-serif;
+        width: fit-content;
+        border: none;
+        font-size: 1rem;
         font-weight: 300;
         cursor: pointer;
         transition: 0.3s;
