@@ -1,8 +1,130 @@
+
+$body-background-color: #ddceb5;
+
 *{
     box-sizing: border-box;
     margin: 0;
 }
 
 body{
-    background-color: #E5D2B2;
+    background-color: $body-background-color
+}
+
+.web-header{
+    display: flex;
+    justify-content: center;
+    height: 15rem;
+    .title-container{
+        h1{
+        font-family: "Inter", sans-serif;
+        font-weight: 400;
+        font-size: 3rem;
+        color: black;
+        margin-left: 10vw;
+        margin-top: 7rem;
+    }
+    width: 80vw;
+    }
+    
+}
+
+.web-body{
+
+    display: flex;
+    flex-direction: column;
+    .action-area{
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .task-area{
+        margin-top: 3rem;
+        display: flex;
+        justify-content: right;
+        padding-right: 20vw;
+    }
+}
+
+.pad{
+    height: 6rem;
+    width: 6rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.pad-area{
+    width: 80vw;
+    max-width: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    .pads-description{
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+        gap: 2rem;
+        height: 22rem;
+        border-right: 0.3rem solid black;
+        padding: 0rem 1.2rem;
+        .dropdown-wrapper{
+            select{
+                border: none;
+                background: none;
+                font-family: "Inter", sans-serif;
+                cursor: pointer;
+            }
+        }
+    }
+    .pads-container{
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 2rem;
+        
+    }
+}
+
+.tasks-container{
+    display: flex;
+    flex-direction: column;
+    font-family: "Inter", sans-serif;
+    color: black;
+    gap: 1rem;
+    h1{
+        font-weight: 400;
+        
+    }
+    .slider-container{
+        margin: 0.8rem 0;
+        .slider{
+            -webkit-appearance: none;
+            background-color: black;
+            height: 0.2rem;
+            &::-moz-range-thumb{
+                -webkit-appearance: black;
+                cursor: pointer;
+                background: black;
+                border: none;
+                width: 1rem;
+                height: 1rem;
+                border-radius: 50%;
+            }
+        }
+        
+    }
+    h3{
+        font-weight: 300;
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        &:hover{
+            text-decoration-color: black;
+        }
+    }
+
+
 }

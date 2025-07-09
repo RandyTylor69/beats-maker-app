@@ -1,5 +1,10 @@
 export default function Header(){
     return(
-        <h1>hi</h1>
+        <header className="web-header">
+            <div className="title-container">
+                <h1>Defiant Jazz</h1>
+            </div>
+            
+        </header>
     )
 }
