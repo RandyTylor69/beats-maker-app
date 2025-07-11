@@ -12,7 +12,6 @@ export default function Pad(props){
             className="pad" 
             style={styles}
             onClick={()=>props.toggle(props.id)}
-            
         />
             
        

@@ -37,25 +37,61 @@ export default function Home() {
 
   const array = [1, 2, 3, 4];
 
+  function activate(pad) {
+    // 1. enlarge the pad
+    setPadsData((prev) =>
+      prev.map((item) => {
+        return item.id === pad.id ? { ...item, scale: 1.2 } : item;
+      })
+    );
+    // 2. reduce the pad (after a while)
+    setTimeout(() => {
+      setPadsData((prev) =>
+        prev.map((item) => {
+          return item.id === pad.id ? { ...item, scale: 1 } : item;
+        })
+      );
+    }, 250);
+  }
+
+  function arraySlicer(array) {
+    // expecting a array of 3 by 8 = 24 elements,
+    // slicing them to 3 arrays of 8 elements,
+    // returning an array of the 3 sliced arrays.
+    const arr1 = array.slice(0, 8);
+    const arr2 = array.slice(8, 16);
+    const arr3 = array.slice(16, 24);
+    return [arr1, arr2, arr3];
+  }
+
+  // -----
+
+  
+
+  // -----
+
+  function looping(array) {
+    // 1. Starting from each of the 3 sliced arrays
+    for (let arr of arraySlicer(array)) {
+
+      // 2. Looping through each sliced array
+      for (let j of arr) {
+        timeouts.current.push(
+          setTimeout(() => {
+            activate(j)
+          }, arr.indexOf(j) * delay)
+        );
+      }
+    }
+  }
+
   React.useEffect(() => {
     if (isStart) {
       // first function call (no delay)
-      for (let i of array) {
-        timeouts.current.push(
-          setTimeout(() => {
-            console.log(i);
-          }, array.indexOf(i) * delay)
-        );
-      }
+      looping(padsData);
       interval.current = setInterval(() => {
-        for (let i of array) {
-          timeouts.current.push(
-            setTimeout(() => {
-              console.log(i);
-            }, array.indexOf(i) * delay)
-          );
-        }
-      }, 4 * delay);
+        looping(padsData);
+      }, 8 * delay);
     } else if (!isStart) {
       clearInterval(interval.current);
       for (let i of timeouts.current) {
