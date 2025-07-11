@@ -7,7 +7,6 @@ export default function Tasks(props) {
         <button 
         className="big-button" 
         type="submit"
-        disabled={props.btnAvail? false : true}
         >
           {props.isStart? "Pause" : "Start"}
         
@@ -18,7 +17,7 @@ export default function Tasks(props) {
           min="0"
           max="100"
           value={props.sliderVolume}
-          onChange={(e) => props.setSliderVolume(e.target.value)}
+          onChange={(e) => props.setTempo(e.target.value)}
           className="slider"
           
         ></input>

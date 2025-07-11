@@ -30,24 +30,24 @@ export default function Pads(props) {
       {/** drop-down menus */}
       <div className="pads-description">
         <div className="dropdown-wrapper">
-          <select name="hat">
-            <option value="1">hat-1</option>
-            <option value="2">hat-2</option>
-            <option value="3">hat-3</option>
+          <select name="hihat">
+            <option value="1">hihat-1</option>
+            <option value="2">hihat-2</option>
+            <option value="3">hihat-3</option>
           </select>
         </div>
         <div className="dropdown-wrapper">
-          <select name="bass">
-            <option value="1">bass-1</option>
-            <option value="2">bass-2</option>
-            <option value="3">bass-3</option>
+          <select name="snare">
+            <option value="1">snare-1</option>
+            <option value="2">snare-2</option>
+            <option value="3">snare-3</option>
           </select>
         </div>
         <div className="dropdown-wrapper">
-          <select name="drum">
-            <option value="1">drum-1</option>
-            <option value="2">drum-2</option>
-            <option value="3">drum-3</option>
+          <select name="kick">
+            <option value="1">kick-1</option>
+            <option value="2">kick-2</option>
+            <option value="3">kick-3</option>
           </select>
         </div>
       </div>
