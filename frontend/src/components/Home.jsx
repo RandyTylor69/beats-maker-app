@@ -6,22 +6,19 @@ import { pads } from "../data";
 export default function Home() {
   // vars for Tasks.jsx
   const [isStart, setIsStart] = React.useState(false);
-  const [tempo, setTempo] = React.useState(30);
+  const [tempo, setTempo] = React.useState(60);
+  const [soundChoices, setSoundChoices] = React.useState({
+    hihat: "hihat-open",
+    snare: "snare-acoustic",
+    kick: "kick-clear"
+  })
 
   // vars for Pads.jssx
   const [padsData, setPadsData] = React.useState(pads);
   const interval = React.useRef(null);
   const timeouts = React.useRef([]);
-  const delay = 500;
 
   // --- FUNCTIONS FOR TASKS.JSX
-
-  function activate(pad) {
-    // scaling the pad
-    if (pad.on) {
-      console.log(pad.id);
-    }
-  }
 
   function toggleStart(e) {
     e.preventDefault();
@@ -33,9 +30,25 @@ export default function Home() {
     setIsStart((prev) => !prev);
   }
 
-  // ---------------- testing --------------
+  // Since no real music producer will use this app,
+  // the tempo shown here is purely imaginative. 
 
-  const array = [1, 2, 3, 4];
+  // Since each pad represents a beat, the tempo (BPM) represents
+  // how fast the app can play 8 beat in a minute.
+  // A slider value of 0  -> 90 BPM  (1 beat / sec)
+  // A slider value of 50 -> 150 BPM (2 beat / sec)
+  // A slider value of 100-> 210 BPM (3 beat / sec)
+  
+  
+  const bpm = (tempo/100*120 + 90); 
+  const delay = 60000 / bpm 
+
+  function makeSound(pad){
+    const sound = new Audio(`/sounds/${soundChoices[pad.type]}.wav`)
+    sound.play()
+  }
+
+  
 
   function activate(pad) {
     // 1. enlarge the pad
@@ -44,7 +57,11 @@ export default function Home() {
         return item.id === pad.id ? { ...item, scale: 1.2 } : item;
       })
     );
-    // 2. reduce the pad (after a while)
+
+    // 2. make sound
+
+    if(pad.on) makeSound(pad)
+    // 3. reduce the pad (after a while)
     setTimeout(() => {
       setPadsData((prev) =>
         prev.map((item) => {
@@ -89,6 +106,7 @@ export default function Home() {
     if (isStart) {
       // first function call (no delay)
       looping(padsData);
+      // second function call (looped with delay)
       interval.current = setInterval(() => {
         looping(padsData);
       }, 8 * delay);
@@ -106,7 +124,13 @@ export default function Home() {
   return (
     <div className="web-body">
       <section className="action-area">
-        <Pads padsData={padsData} setPadsData={setPadsData} isStart={isStart} />
+        <Pads 
+        padsData={padsData} 
+        setPadsData={setPadsData} 
+        isStart={isStart}
+        soundChoices = {soundChoices}
+        setSoundChoices = {setSoundChoices}
+         />
       </section>
       <section className="task-area">
         <Tasks

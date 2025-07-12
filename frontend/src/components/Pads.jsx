@@ -1,6 +1,25 @@
 import Pad from "./Pad";
-
+import React from "react";
 export default function Pads(props) {
+  const hihats = [
+    { label: "hihat-open", value: "hihat-open", type: "hihat" },
+    { label: "hihat-accent", value: "hihat-accent", type: "hihat" },
+    { label: "hihat-chick", value: "hihat-chick", type: "hihat" },
+    { label: "hihat-closed", value: "hihat-closed", type: "hihat" },
+  ];
+  const snares = [
+    { label: "snare-acoustic", value: "snare-acoustic", type: "snare" },
+    { label: "snare-power", value: "snare-power", type: "snare" },
+    { label: "snare-rim", value: "snare-rim", type: "snare" },
+    { label: "snare-rock", value: "snare-rock", type: "snare" },
+  ];
+  const kicks = [
+    { label: "kick-clear", value: "kick-clear", type: "kick" },
+    { label: "kick-house", value: "kick-house", type: "kick" },
+    { label: "kick-rifle", value: "kick-rifle", type: "kick" },
+    { label: "kick-synth", value: "kick-synth", type: "kick" },
+    { label: "kick-sweden", value: "kick-sweden", type: "kick" },
+  ];
   // turns on / off the pads
   function toggle(id) {
     props.setPadsData((prevArray) =>
@@ -25,32 +44,51 @@ export default function Pads(props) {
     );
   });
 
+  const hihatsMapped = hihats.map((hihat) => {
+    return <option value={hihat.value}>{hihat.label}</option>;
+  });
+
+  const snaresMapped = snares.map((snare) => {
+    return <option value={snare.value}>{snare.label}</option>;
+  });
+
+  const kicksMapped = kicks.map((kick) => {
+    return <option value={kick.value}>{kick.label}</option>;
+  });
+
+  function submitSound(e){
+    e.preventDefault()
+    const sound = e.target.value
+
+    if(sound.includes("hihat")){
+      props.setSoundChoices(prev=>({...prev, hihat: sound}))
+    } else if (sound.includes("snare")) {
+      props.setSoundChoices(prev=>({...prev, snare: sound}))
+    } else if (sound.includes("kick")) {
+      props.setSoundChoices(prev=>({...prev, kick: sound}))
+    }
+  }
+
   return (
     <section className="pad-area">
       {/** drop-down menus */}
-      <div className="pads-description">
+      <form  onChange={submitSound} className="pads-description">
         <div className="dropdown-wrapper">
           <select name="hihat">
-            <option value="1">hihat-1</option>
-            <option value="2">hihat-2</option>
-            <option value="3">hihat-3</option>
+            {hihatsMapped}
           </select>
         </div>
         <div className="dropdown-wrapper">
           <select name="snare">
-            <option value="1">snare-1</option>
-            <option value="2">snare-2</option>
-            <option value="3">snare-3</option>
+            {snaresMapped}
           </select>
         </div>
         <div className="dropdown-wrapper">
           <select name="kick">
-            <option value="1">kick-1</option>
-            <option value="2">kick-2</option>
-            <option value="3">kick-3</option>
+            {kicksMapped}
           </select>
         </div>
-      </div>
+      </form>
       {/** actual pads */}
       <div className="pads-container">{padsMapped}</div>
     </section>
