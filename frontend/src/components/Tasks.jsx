@@ -16,7 +16,7 @@ export default function Tasks(props) {
           type="range"
           min="0"
           max="100"
-          value={props.sliderVolume}
+          value={props.tempo}
           onChange={(e) => props.setTempo(e.target.value)}
           className="slider"
           

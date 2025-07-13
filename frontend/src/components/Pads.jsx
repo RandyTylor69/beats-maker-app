@@ -18,7 +18,7 @@ export default function Pads(props) {
     { label: "kick-house", value: "kick-house", type: "kick" },
     { label: "kick-rifle", value: "kick-rifle", type: "kick" },
     { label: "kick-synth", value: "kick-synth", type: "kick" },
-    { label: "kick-sweden", value: "kick-sweden", type: "kick" },
+    { label: "kick-swedish", value: "kick-swedish", type: "kick" },
   ];
   // turns on / off the pads
   function toggle(id) {

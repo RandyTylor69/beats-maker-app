@@ -1,155 +1,211 @@
-
 $body-background-color: #ddceb5;
 
-*{
-    box-sizing: border-box;
-    margin: 0;
+* {
+  box-sizing: border-box;
+  margin: 0;
 }
 
-body{
-    background-color: $body-background-color
+body {
+  background-color: $body-background-color;
 }
 
-.web-header{
-    display: flex;
-    justify-content: center;
-    height: 15rem;
-    .title-container{
-        h1{
-        font-family: "Inter", sans-serif;
-        font-weight: 400;
-        font-size: 3rem;
-        color: black;
-        margin-left: 10vw;
-        margin-top: 7rem;
+.web-header {
+  display: flex;
+  justify-content: center;
+  height: 15rem;
+  .title-container {
+    h1 {
+      font-family: "Inter", sans-serif;
+      font-weight: 400;
+      font-size: 3rem;
+      color: black;
+      margin-left: 10vw;
+      margin-top: 7rem;
     }
     width: 80vw;
-    }
-    
+  }
 }
 
-.web-body{
-
-    display: flex;
-    flex-direction: column;
-    .action-area{
-        
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .task-area{
-        margin-top: 3rem;
-        display: flex;
-        justify-content: right;
-        padding-right: 20vw;
-    }
-}
-
-.pad{
-    height: 6rem;
-    width: 6rem;
-    border: none;
-    cursor: pointer;
-    transition: 0.4s;
-    opacity: 0.2;
-}
-
-.pad-area{
-    width: 80vw;
-    max-width: 80vh;
+.web-body {
+  display: flex;
+  flex-direction: column;
+  .action-area {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
-
-    .pads-description{
-        display: grid;
-        grid-template-rows: repeat(3, 1fr);
-        gap: 2rem;
-        height: 22rem;
-        border-right: 0.3rem solid black;
-        padding: 0rem 1.2rem;
-        .dropdown-wrapper{
-            select{
-                border: none;
-                background: none;
-                font-family: "Inter", sans-serif;
-                cursor: pointer;
-            }
-        }
-    }
-    .pads-container{
-        display: grid;
-        grid-template-columns: repeat(8, 1fr);
-        grid-template-rows: repeat(3, 1fr);
-        gap: 2rem;
-        
-    }
+  }
+  .task-area {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: right;
+    padding-right: 20vw;
+  }
 }
 
-.tasks-container{
-    display: flex;
-    flex-direction: column;
-    font-family: "Inter", sans-serif;
-    color: black;
-    gap: 1rem;
-   
-    .slider-form{
-        margin: 0.8rem 0;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        .big-button{
-            font-family: "Inter", sans-serif;
-            background:none;
-            border: none;
-            font-size: 2rem;
-            font-weight: 300;
-            cursor: pointer;
-            display: flex;
-            text-align: left;
-            transition: 0.3s;
-            &:hover{
-                font-weight: 400;
-            }
-            &:disabled{
-                cursor:no-drop;
-                opacity: 0.3;
-                color: black;
-            }
-        }
-        .slider{
-            -webkit-appearance: none;
-            background-color: black;
-            height: 0.2rem;
-            &::-moz-range-thumb{
-                -webkit-appearance: black;
-                cursor: pointer;
-                background: black;
-                border: none;
-                width: 1rem;
-                height: 1rem;
-                border-radius: 50%;
-            }
-        }
-        
-    }
-   .small-button {
+.pad {
+  height: 6rem;
+  width: 6rem;
+  border: none;
+  cursor: pointer;
+  transition: 0.4s;
+  opacity: 0.2;
+}
+
+.pad-area {
+  width: 80vw;
+  max-width: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  .pads-description {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2rem;
+    height: 22rem;
+    border-right: 0.3rem solid black;
+    padding: 0rem 1.2rem;
+    .dropdown-wrapper {
+      select {
+        border: none;
         background: none;
         font-family: "Inter", sans-serif;
-        width: fit-content;
-        border: none;
-        font-size: 1rem;
-        font-weight: 300;
         cursor: pointer;
-        transition: 0.3s;
-        text-decoration: underline;
-        text-decoration-color: transparent;
-        &:hover{
-            text-decoration-color: black;
-        }
+      }
     }
+  }
+  .pads-container {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
 
+.task-area {
+  height: 11rem;
+  display: flex;
+  gap: 5rem;
+}
 
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+  font-family: "Inter", sans-serif;
+  color: black;
+  gap: 1rem;
+
+  .slider-form {
+    margin: 0.8rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    .big-button {
+      font-family: "Inter", sans-serif;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      font-weight: 300;
+      cursor: pointer;
+      display: flex;
+      text-align: left;
+      transition: 0.3s;
+      &:hover {
+        font-weight: 400;
+      }
+      &:disabled {
+        cursor: no-drop;
+        opacity: 0.3;
+        color: black;
+      }
+    }
+    .slider {
+      -webkit-appearance: none;
+      background-color: black;
+      height: 0.2rem;
+      &::-moz-range-thumb {
+        -webkit-appearance: black;
+        cursor: pointer;
+        background: black;
+        border: none;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+      }
+    }
+  }
+  .small-button {
+    background: none;
+    font-family: "Inter", sans-serif;
+    width: fit-content;
+    border: none;
+    font-size: 1rem;
+    font-weight: 300;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    &:hover {
+      text-decoration-color: black;
+    }
+  }
+}
+
+.keyboard-container {
+  height: 11rem;
+  width: 21rem;
+  position: relative;
+
+  .white-key-container {
+    display: flex;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+
+    .white-key {
+      width: 4rem;
+      border: 3px solid black;
+      cursor: pointer;
+      transition: 0.3s;
+      background-color: rgb(226, 226, 226);
+      &:hover {
+        background-color: rgb(212, 212, 212);
+      }
+      height: 11rem;
+      margin: 0px -3px;
+    }
+  }
+
+  .black-key-container1 {
+    display: flex;
+    position: absolute;
+    z-index: 20;
+    width: 5rem;
+    left: 1.9rem;
+    height: 8rem;
+    justify-content: space-between;
+  }
+  .black-key-container2 {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    left: 10.9rem;
+    z-index: 20;
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .black-key {
+    height: 100%;
+    border: none;
+    width: 2rem;
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: rgb(0, 0, 0);
+    &:hover {
+      background-color: rgb(31, 31, 31);
+    }
+  }
 }

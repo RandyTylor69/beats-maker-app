@@ -1,12 +1,14 @@
 import Pads from "./Pads";
 import Tasks from "./Tasks";
+import Keyboard from "./Keyboard";
 import React from "react";
 import { pads } from "../data";
+
 
 export default function Home() {
   // vars for Tasks.jsx
   const [isStart, setIsStart] = React.useState(false);
-  const [tempo, setTempo] = React.useState(60);
+  const [tempo, setTempo] = React.useState(80);
   const [soundChoices, setSoundChoices] = React.useState({
     hihat: "hihat-open",
     snare: "snare-acoustic",
@@ -22,12 +24,10 @@ export default function Home() {
 
   function toggleStart(e) {
     e.preventDefault();
-
-    // 1. grabbing the Tempo (deafault at 30)
-    const formData = tempo;
-
-    // 2. change "start" to "pause" or vise versa
+    // 1. change "start" to "pause" or vise versa
     setIsStart((prev) => !prev);
+
+    
   }
 
   // Since no real music producer will use this app,
@@ -48,7 +48,8 @@ export default function Home() {
     sound.play()
   }
 
-  
+  console.log(delay)
+
 
   function activate(pad) {
     // 1. enlarge the pad
@@ -133,6 +134,7 @@ export default function Home() {
          />
       </section>
       <section className="task-area">
+        <Keyboard />
         <Tasks
           padsData={padsData}
           toggleStart={toggleStart}
