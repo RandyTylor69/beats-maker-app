@@ -4,7 +4,6 @@ import Keyboard from "./Keyboard";
 import React from "react";
 import { pads } from "../data";
 
-
 export default function Home() {
   // vars for Tasks.jsx
   const [isStart, setIsStart] = React.useState(false);
@@ -12,8 +11,9 @@ export default function Home() {
   const [soundChoices, setSoundChoices] = React.useState({
     hihat: "hihat-open",
     snare: "snare-acoustic",
-    kick: "kick-clear"
-  })
+    kick: "kick-clear",
+  });
+  const [keyboardChoice, setKeyboardChoice] = React.useState("bass")
 
   // vars for Pads.jssx
   const [padsData, setPadsData] = React.useState(pads);
@@ -26,29 +26,24 @@ export default function Home() {
     e.preventDefault();
     // 1. change "start" to "pause" or vise versa
     setIsStart((prev) => !prev);
-
-    
   }
 
   // Since no real music producer will use this app,
-  // the tempo shown here is purely imaginative. 
+  // the tempo shown here is purely imaginative.
 
   // Since each pad represents a beat, the tempo (BPM) represents
   // how fast the app can play 8 beat in a minute.
   // A slider value of 0  -> 90 BPM  (1 beat / sec)
   // A slider value of 50 -> 150 BPM (2 beat / sec)
   // A slider value of 100-> 210 BPM (3 beat / sec)
-  
-  
-  const bpm = (tempo/100*120 + 90); 
-  const delay = 60000 / bpm 
 
-  function makeSound(pad){
-    const sound = new Audio(`/sounds/${soundChoices[pad.type]}.wav`)
-    sound.play()
+  const bpm = (tempo / 100) * 120 + 90;
+  const delay = 60000 / bpm;
+
+  function makeSound(pad) {
+    const sound = new Audio(`/sounds/${soundChoices[pad.type]}.wav`);
+    sound.play();
   }
-
-  console.log(delay)
 
 
   function activate(pad) {
@@ -61,7 +56,7 @@ export default function Home() {
 
     // 2. make sound
 
-    if(pad.on) makeSound(pad)
+    if (pad.on) makeSound(pad);
     // 3. reduce the pad (after a while)
     setTimeout(() => {
       setPadsData((prev) =>
@@ -84,19 +79,16 @@ export default function Home() {
 
   // -----
 
-  
-
   // -----
 
   function looping(array) {
     // 1. Starting from each of the 3 sliced arrays
     for (let arr of arraySlicer(array)) {
-
       // 2. Looping through each sliced array
       for (let j of arr) {
         timeouts.current.push(
           setTimeout(() => {
-            activate(j)
+            activate(j);
           }, arr.indexOf(j) * delay)
         );
       }
@@ -125,22 +117,27 @@ export default function Home() {
   return (
     <div className="web-body">
       <section className="action-area">
-        <Pads 
-        padsData={padsData} 
-        setPadsData={setPadsData} 
-        isStart={isStart}
-        soundChoices = {soundChoices}
-        setSoundChoices = {setSoundChoices}
-         />
+        <Pads
+          padsData={padsData}
+          setPadsData={setPadsData}
+          isStart={isStart}
+          soundChoices={soundChoices}
+          setSoundChoices={setSoundChoices}
+        />
       </section>
       <section className="task-area">
-        <Keyboard />
+        <Keyboard
+          keyboardChoice={keyboardChoice}
+          setKeyboardChoice={setKeyboardChoice}
+        />
         <Tasks
           padsData={padsData}
           toggleStart={toggleStart}
           tempo={tempo}
           setTempo={setTempo}
           isStart={isStart}
+          keyboardChoice={keyboardChoice}
+          setKeyboardChoice={setKeyboardChoice}
         />
       </section>
     </div>
