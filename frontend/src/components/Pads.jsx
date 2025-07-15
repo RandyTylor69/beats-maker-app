@@ -20,14 +20,6 @@ export default function Pads(props) {
     { label: "kick-synth", value: "kick-synth", type: "kick" },
     { label: "kick-swedish", value: "kick-swedish", type: "kick" },
   ];
-  // turns on / off the pads
-  function toggle(id) {
-    props.setPadsData((prevArray) =>
-      prevArray.map((item) =>
-        item.id === id ? { ...item, on: !item.on } : item
-      )
-    );
-  }
 
   const padsMapped = props.padsData.map((pad) => {
     return (
@@ -38,8 +30,8 @@ export default function Pads(props) {
         id={pad.id}
         type={pad.type}
         scale={pad.scale}
-        toggle={toggle}
         activate={props.activate}
+        setPadsData = {props.setPadsData}
       />
     );
   });

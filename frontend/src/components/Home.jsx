@@ -13,10 +13,15 @@ export default function Home() {
     snare: "snare-acoustic",
     kick: "kick-clear",
   });
-  const [keyboardChoice, setKeyboardChoice] = React.useState("bass")
+  const updatedSoundChoices = React.useRef(null);
+  updatedSoundChoices.current = soundChoices;
+  const [keyboardChoice, setKeyboardChoice] = React.useState("bass");
+  const [openKeyPositions, setOpenKeyPositions] = React.useState(false);
 
   // vars for Pads.jssx
   const [padsData, setPadsData] = React.useState(pads);
+  const updatedPadsData = React.useRef(null);
+  updatedPadsData.current = padsData;
   const interval = React.useRef(null);
   const timeouts = React.useRef([]);
 
@@ -41,13 +46,14 @@ export default function Home() {
   const delay = 60000 / bpm;
 
   function makeSound(pad) {
-    const sound = new Audio(`/sounds/${soundChoices[pad.type]}.wav`);
+    const sound = new Audio(
+      `/sounds/${updatedSoundChoices.current[pad.type]}.wav`
+    );
     sound.play();
   }
 
-
   function activate(pad) {
-    // 1. enlarge the pad
+    // 1. enlarge the pad size
     setPadsData((prev) =>
       prev.map((item) => {
         return item.id === pad.id ? { ...item, scale: 1.2 } : item;
@@ -55,9 +61,9 @@ export default function Home() {
     );
 
     // 2. make sound
-
     if (pad.on) makeSound(pad);
-    // 3. reduce the pad (after a while)
+
+    // 3. reduce the pad size (after a while)
     setTimeout(() => {
       setPadsData((prev) =>
         prev.map((item) => {
@@ -98,10 +104,10 @@ export default function Home() {
   React.useEffect(() => {
     if (isStart) {
       // first function call (no delay)
-      looping(padsData);
+      looping(updatedPadsData.current);
       // second function call (looped with delay)
       interval.current = setInterval(() => {
-        looping(padsData);
+        looping(updatedPadsData.current);
       }, 8 * delay);
     } else if (!isStart) {
       clearInterval(interval.current);
@@ -123,12 +129,15 @@ export default function Home() {
           isStart={isStart}
           soundChoices={soundChoices}
           setSoundChoices={setSoundChoices}
+          updatedPadsData={updatedPadsData}
         />
       </section>
       <section className="task-area">
         <Keyboard
           keyboardChoice={keyboardChoice}
           setKeyboardChoice={setKeyboardChoice}
+          openKeyPositions={openKeyPositions}
+          setOpenKeyPositions={setOpenKeyPositions}
         />
         <Tasks
           padsData={padsData}
@@ -138,6 +147,8 @@ export default function Home() {
           isStart={isStart}
           keyboardChoice={keyboardChoice}
           setKeyboardChoice={setKeyboardChoice}
+          openKeyPositions={openKeyPositions}
+          setOpenKeyPositions={setOpenKeyPositions}
         />
       </section>
     </div>

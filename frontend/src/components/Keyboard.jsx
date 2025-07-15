@@ -1,42 +1,43 @@
 import { useEffect, useRef, useState } from "react";
 
 export default function Keyboard(props) {
+  const keyboardOptions = ["bass", "piano"];
   const keySounds = useRef({}); // intentionally left empty
-
+  const keyNotes = [
+    "f0",
+    "f0s",
+    "g0",
+    "g0s",
+    "a1",
+    "a1s",
+    "b1",
+    "c1",
+    "c1s",
+    "d1",
+    "d1s",
+    "e1",
+    "f1",
+    "f1s",
+    "g1",
+    "g1s",
+    "a2",
+    "a2s",
+    "b2",
+  ];
   // The keySounds object will be populated with new Audio objects
   // when the app is opened, and each keyboard-press will play that
   // existing Audio object, avoiding creating a new one upon every
   // re-render. Apparently, a browser limits the amount of Audio
   // objects you can have, depending on how many files it can load
   // without timing out due to too many requests. (According to SO)
-  const keyboardChoice = props.keyboardChoice;
-
-  console.log(keyboardChoice);
   // Populating the keySounds object.
   useEffect(() => {
-    keySounds.current["a1"] = new Audio(`${keyboardChoice}-notes/a1.wav`);
-    keySounds.current["a1s"] = new Audio(`${keyboardChoice}-notes/a1s.wav`);
-    keySounds.current["b1"] = new Audio(`${keyboardChoice}-notes/b1.wav`);
-    keySounds.current["c1"] = new Audio(`${keyboardChoice}-notes/c1.wav`);
-    keySounds.current["c1s"] = new Audio(`${keyboardChoice}-notes/c1s.wav`);
-    keySounds.current["d0"] = new Audio(`${keyboardChoice}-notes/d0.wav`);
-    keySounds.current["d0s"] = new Audio(`${keyboardChoice}-notes/d0s.wav`);
-    keySounds.current["d1"] = new Audio(`${keyboardChoice}-notes/d1.wav`);
-    keySounds.current["d1s"] = new Audio(`${keyboardChoice}-notes/d1s.wav`);
-    keySounds.current["e0"] = new Audio(`${keyboardChoice}-notes/e0.wav`);
-    keySounds.current["e1"] = new Audio(`${keyboardChoice}-notes/e1.wav`);
-    keySounds.current["f0"] = new Audio(`${keyboardChoice}-notes/f0.wav`);
-    keySounds.current["f0s"] = new Audio(`${keyboardChoice}-notes/f0s.wav`);
-    keySounds.current["f1"] = new Audio(`${keyboardChoice}-notes/f1.wav`);
-    keySounds.current["f1s"] = new Audio(`${keyboardChoice}-notes/f1s.wav`);
-    keySounds.current["g0"] = new Audio(`${keyboardChoice}-notes/g0.wav`);
-    keySounds.current["g0s"] = new Audio(`${keyboardChoice}-notes/g0s.wav`);
-    keySounds.current["g1"] = new Audio(`${keyboardChoice}-notes/g1.wav`);
-    keySounds.current["g1s"] = new Audio(`${keyboardChoice}-notes/g1s.wav`);
-    keySounds.current["a2"] = new Audio(`${keyboardChoice}-notes/a2.wav`);
-    keySounds.current["a2s"] = new Audio(`${keyboardChoice}-notes/a2s.wav`);
-    keySounds.current["b2"] = new Audio(`${keyboardChoice}-notes/b2.wav`);
-  }, [keyboardChoice]);
+    for (let key of keyNotes) {
+      keySounds.current[key] = new Audio(
+        `${props.keyboardChoice}-notes/${key}.wav`
+      );
+    }
+  }, [props.keyboardChoice]);
 
   function playKey(key) {
     const sound = keySounds.current[key];
@@ -44,61 +45,93 @@ export default function Keyboard(props) {
     sound.play();
   }
 
+  // for the key sound options
+
+  const keyboardOptionsMapped = keyboardOptions.map((opt) => {
+    return <option className="dropdown-option">{opt}</option>;
+  });
+
+  function submitDropdown(e) {
+    props.setKeyboardChoice(e.target.value);
+  }
+
+  function toggleKeyPositions() {
+    props.setOpenKeyPositions((prev) => !prev);
+  }
+
   // a2, a2s, b2
   return (
     <div className="keyboard-container">
+      <form className="keyboard-form" onChange={(e) => submitDropdown(e)}>
+        <select onClick={toggleKeyPositions}>{keyboardOptionsMapped}</select>
+      </form>
+
       <section className="keyboard">
         <div className="white-key-container">
-          <button className="white-key" onClick={() => playKey("f0")}></button>
-          <button className="white-key" onClick={() => playKey("g0")}></button>
-          <button className="white-key" onClick={() => playKey("a1")}></button>
-          <button className="white-key" onClick={() => playKey("b1")}></button>
-          <button className="white-key" onClick={() => playKey("c1")}></button>
-          <button className="white-key" onClick={() => playKey("d1")}></button>
-          <button className="white-key" onClick={() => playKey("e1")}></button>
-          <button className="white-key" onClick={() => playKey("f1")}></button>
-          <button className="white-key" onClick={() => playKey("g1")}></button>
-          <button className="white-key" onClick={() => playKey("a2")}></button>
-          <button className="white-key" onClick={() => playKey("b2")}></button>
+          <button className="white-key" onClick={() => playKey("f0")}>
+            {props.openKeyPositions && <p>Q</p>}
+          </button>
+          <button className="white-key" onClick={() => playKey("g0")}>
+            {props.openKeyPositions && <p>W</p>}
+          </button>
+          <button className="white-key" onClick={() => playKey("a1")}>
+            {props.openKeyPositions && <p>E</p>}
+          </button>
+          <button className="white-key" onClick={() => playKey("b1")}>
+            {props.openKeyPositions && <p>R</p>}
+          </button>
+          <button className="white-key" onClick={() => playKey("c1")}>
+            {props.openKeyPositions && <p>T</p>}
+          </button>
+          <button className="white-key" onClick={() => playKey("d1")}>
+            {props.openKeyPositions && <p>Y</p>}
+          </button>
+          <button className="white-key" onClick={() => playKey("e1")}>
+            {props.openKeyPositions && <p>U</p>}
+          </button>
+          <button className="white-key" onClick={() => playKey("f1")}>
+            {props.openKeyPositions && <p>I</p>}
+          </button>
+          <button className="white-key" onClick={() => playKey("g1")}>
+            {props.openKeyPositions && <p>O</p>}
+          </button>
+          <button className="white-key" onClick={() => playKey("a2")}>
+            {props.openKeyPositions && <p>P</p>}
+          </button>
+          <button className="white-key" onClick={() => playKey("b2")}>
+            {props.openKeyPositions && <p>{`[`}</p>}
+          </button>
         </div>
         <div className="black-key-container">
           <div className="black-key-container1">
-            <button
-              className="black-key"
-              onClick={() => playKey("f0s")}
-            ></button>
-            <button
-              className="black-key"
-              onClick={() => playKey("g0s")}
-            ></button>
-            <button
-              className="black-key"
-              onClick={() => playKey("a1s")}
-            ></button>
+            <button className="black-key" onClick={() => playKey("f0s")}>
+              {props.openKeyPositions && <p>2</p>}
+            </button>
+            <button className="black-key" onClick={() => playKey("g0s")}>
+              {props.openKeyPositions && <p>3</p>}
+            </button>
+            <button className="black-key" onClick={() => playKey("a1s")}>
+              {props.openKeyPositions && <p>4</p>}
+            </button>
           </div>
           <div className="black-key-container2">
-            <button
-              className="black-key"
-              onClick={() => playKey("c1s")}
-            ></button>
-            <button
-              className="black-key"
-              onClick={() => playKey("d1s")}
-            ></button>
+            <button className="black-key" onClick={() => playKey("c1s")}>
+              {props.openKeyPositions && <p>6</p>}
+            </button>
+            <button className="black-key" onClick={() => playKey("d1s")}>
+              {props.openKeyPositions && <p>7</p>}
+            </button>
           </div>
           <div className="black-key-container3">
-            <button
-              className="black-key"
-              onClick={() => playKey("f1s")}
-            ></button>
-            <button
-              className="black-key"
-              onClick={() => playKey("g1s")}
-            ></button>
-            <button
-              className="black-key"
-              onClick={() => playKey("a2s")}
-            ></button>
+            <button className="black-key" onClick={() => playKey("f1s")}>
+              {props.openKeyPositions && <p>9</p>}
+            </button>
+            <button className="black-key" onClick={() => playKey("g1s")}>
+              {props.openKeyPositions && <p>0</p>}
+            </button>
+            <button className="black-key" onClick={() => playKey("a2s")}>
+              {props.openKeyPositions && <p>-</p>}
+            </button>
           </div>
         </div>
       </section>
