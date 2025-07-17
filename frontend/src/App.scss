@@ -13,6 +13,7 @@ body {
   display: flex;
   justify-content: center;
   height: 15rem;
+  padding-left: 15rem;
   .title-container {
     h1 {
       font-family: "Inter", sans-serif;
@@ -28,8 +29,8 @@ body {
 .web-body {
   display: flex;
   flex-direction: column;
-  width: 80vw;
-  min-width: 80vw;
+  width: 80rem;
+  min-width: 80rem;
   margin: auto;
 
   .action-area {
@@ -37,8 +38,8 @@ body {
     justify-content: center;
     align-items: center;
     .pad {
-      height: 6rem;
-      width: 6rem;
+      height: 3rem;
+      width: 3rem;
       border: none;
       cursor: pointer;
       transition: 0.4s;
@@ -71,24 +72,28 @@ body {
       }
       .pads-container {
         display: grid;
-        grid-template-columns: repeat(8, 1fr);
+        grid-template-columns: repeat(16, 1fr);
         grid-template-rows: repeat(3, 1fr);
-        gap: 2rem;
+       grid-row-gap: 4rem;
+       grid-column-gap: 1rem;
+        width: auto;
+      
       }
     }
   }
 
   .task-area {
-    width: 80vw;
+    width: 60rem;
     margin-top: 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-left: 10rem;
 
     .keyboard-container {
       height: 16em;
-      width: 80vw;
+      width: 60rem;
       display: flex;
       justify-content: center;
 

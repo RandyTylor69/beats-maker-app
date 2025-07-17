@@ -36,14 +36,11 @@ export default function Home() {
   // Since no real music producer will use this app,
   // the tempo shown here is purely imaginative.
 
-  // Since each pad represents a beat, the tempo (BPM) represents
-  // how fast the app can play 8 beat in a minute.
-  // A slider value of 0  -> 90 BPM  (1 beat / sec)
-  // A slider value of 50 -> 150 BPM (2 beat / sec)
-  // A slider value of 100-> 210 BPM (3 beat / sec)
+  // a medium tempo of 50 represents 200ms of delay.
+  
 
-  const bpm = (tempo / 100) * 120 + 90;
-  const delay = 60000 / bpm;
+  
+  const delay = 1000/(tempo/10)
 
   function makeSound(pad) {
     const sound = new Audio(
@@ -77,9 +74,9 @@ export default function Home() {
     // expecting a array of 3 by 8 = 24 elements,
     // slicing them to 3 arrays of 8 elements,
     // returning an array of the 3 sliced arrays.
-    const arr1 = array.slice(0, 8);
-    const arr2 = array.slice(8, 16);
-    const arr3 = array.slice(16, 24);
+    const arr1 = array.slice(0, 16);
+    const arr2 = array.slice(16, 32);
+    const arr3 = array.slice(32, 48);
     return [arr1, arr2, arr3];
   }
 
@@ -108,7 +105,7 @@ export default function Home() {
       // second function call (looped with delay)
       interval.current = setInterval(() => {
         looping(updatedPadsData.current);
-      }, 8 * delay);
+      }, 16 * delay);
     } else if (!isStart) {
       clearInterval(interval.current);
       for (let i of timeouts.current) {

@@ -28,6 +28,7 @@ export default function Tasks(props) {
       <button className="small-button">My Beats</button>
       <form className="slider-form" onSubmit={(e) => props.toggleStart(e)}>
         <input
+        title="change the speed"
           name="slider"
           type="range"
           min="0"

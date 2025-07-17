@@ -11,6 +11,7 @@ body {
   display: flex;
   justify-content: center;
   height: 15rem;
+  padding-left: 15rem;
 }
 .web-header .title-container {
   width: 70rem;
@@ -26,8 +27,8 @@ body {
 .web-body {
   display: flex;
   flex-direction: column;
-  width: 80vw;
-  min-width: 80vw;
+  width: 80rem;
+  min-width: 80rem;
   margin: auto;
 }
 .web-body .action-area {
@@ -36,8 +37,8 @@ body {
   align-items: center;
 }
 .web-body .action-area .pad {
-  height: 6rem;
-  width: 6rem;
+  height: 3rem;
+  width: 3rem;
   border: none;
   cursor: pointer;
   transition: 0.4s;
@@ -67,21 +68,24 @@ body {
 }
 .web-body .action-area .pad-area .pads-container {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(16, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: 2rem;
+  grid-row-gap: 4rem;
+  grid-column-gap: 1rem;
+  width: auto;
 }
 .web-body .task-area {
-  width: 80vw;
+  width: 60rem;
   margin-top: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-left: 10rem;
 }
 .web-body .task-area .keyboard-container {
   height: 16em;
-  width: 80vw;
+  width: 60rem;
   display: flex;
   justify-content: center;
 }
