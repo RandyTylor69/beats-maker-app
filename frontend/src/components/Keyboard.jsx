@@ -39,6 +39,38 @@ export default function Keyboard(props) {
     }
   }, [props.keyboardChoice]);
 
+  // detect key press if the user wishes to play the keyboard by using the keyboard.
+  useEffect(() => {
+    document.addEventListener("keydown", (e) => {
+      // getting the key being pressed
+      const key = e.key;
+
+      // white keys:
+      if (key === "q") playKey("f0");
+      else if (key === "w") playKey("g0");
+      else if (key === "e") playKey("a1");
+      else if (key === "r") playKey("b1");
+      else if (key === "t") playKey("c1");
+      else if (key === "y") playKey("d1");
+      else if (key === "u") playKey("e1");
+      else if (key === "i") playKey("f1");
+      else if (key === "o") playKey("g1");
+      else if (key === "p") playKey("a2");
+      else if (key === "[") playKey("b2");
+
+      // black keys:
+      else if (key==="2") playKey("f0s");
+      else if (key==="3") playKey("g0s");
+      else if (key==="4") playKey("a1s");
+      else if (key==="6") playKey("c1s");
+      else if (key==="7") playKey("d1s");
+      else if (key==="9") playKey("f1s");
+      else if (key==="0") playKey("g1s");
+      else if (key==="-") playKey("a2s");
+      
+    });
+  }, []);
+
   function playKey(key) {
     const sound = keySounds.current[key];
     sound.currentTime = 0;
@@ -47,23 +79,20 @@ export default function Keyboard(props) {
 
   // for the key sound options
 
-  const keyboardOptionsMapped = keyboardOptions.map((opt) => {
-    return <option className="dropdown-option">{opt}</option>;
+  const keyboardOptionsMapped = keyboardOptions.map((opt, id) => {
+    return <option className="dropdown-option" key={id}>{opt}</option>;
   });
 
   function submitDropdown(e) {
     props.setKeyboardChoice(e.target.value);
   }
 
-  function toggleKeyPositions() {
-    props.setOpenKeyPositions((prev) => !prev);
-  }
 
   // a2, a2s, b2
   return (
     <div className="keyboard-container">
       <form className="keyboard-form" onChange={(e) => submitDropdown(e)}>
-        <select onClick={toggleKeyPositions}>{keyboardOptionsMapped}</select>
+        <select>{keyboardOptionsMapped}</select>
       </form>
 
       <section className="keyboard">

@@ -36,16 +36,16 @@ export default function Pads(props) {
     );
   });
 
-  const hihatsMapped = hihats.map((hihat) => {
-    return <option value={hihat.value}>{hihat.label}</option>;
+  const hihatsMapped = hihats.map((hihat, id) => {
+    return <option value={hihat.value} key={id}>{hihat.label}</option>;
   });
 
-  const snaresMapped = snares.map((snare) => {
-    return <option value={snare.value}>{snare.label}</option>;
+  const snaresMapped = snares.map((snare, id) => {
+    return <option value={snare.value} key={id}>{snare.label}</option>;
   });
 
-  const kicksMapped = kicks.map((kick) => {
-    return <option value={kick.value}>{kick.label}</option>;
+  const kicksMapped = kicks.map((kick,id) => {
+    return <option value={kick.value} key={id}>{kick.label}</option>;
   });
 
   function submitSound(e){

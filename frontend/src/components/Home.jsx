@@ -16,7 +16,7 @@ export default function Home() {
   const updatedSoundChoices = React.useRef(null);
   updatedSoundChoices.current = soundChoices;
   const [keyboardChoice, setKeyboardChoice] = React.useState("bass");
-  const [openKeyPositions, setOpenKeyPositions] = React.useState(false);
+  const [openKeyPositions, setOpenKeyPositions] = React.useState(true);
 
   // vars for Pads.jssx
   const [padsData, setPadsData] = React.useState(pads);
@@ -149,6 +149,9 @@ export default function Home() {
           setKeyboardChoice={setKeyboardChoice}
           openKeyPositions={openKeyPositions}
           setOpenKeyPositions={setOpenKeyPositions}
+          // for the server
+          updatedSoundChoices = {updatedSoundChoices.current}
+          updatedPadsData = {updatedPadsData.current}
         />
       </section>
     </div>
