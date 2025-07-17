@@ -58,7 +58,7 @@ body {
         display: grid;
         grid-template-rows: repeat(3, 1fr);
         gap: 2rem;
-        height: 22rem;
+        height: 17rem;
         border-right: 0.3rem solid black;
         padding: 0rem 1.2rem;
         .dropdown-wrapper {
@@ -287,24 +287,56 @@ body {
 }
 
 .sample-container {
-  margin-top: 2rem;
-  margin-left: 5rem;
+  position:absolute;
+  z-index: 9999;
+
+  backdrop-filter: blur(6px);
   width: 40rem;
-  border-radius: 2rem;
+  min-height: 40rem;
+  border-radius: 1rem;
+  border: 2px black solid;
   background-color: rgb(0, 0, 0, 0.1);
+
+  margin-bottom: 20rem;
+
   display: flex;
   flex-direction: column;
+  text-align: center;
+  gap: 1rem;
+
   padding: 2rem;
   font-family: "Inter", sans-serif;
+
+
+  .sample-header{
+    display: flex;
+    justify-content: right;
+    height: 3rem;
+    button{
+      font-size: 2rem;
+      background:none;
+      border:none;
+      cursor: pointer;
+    }
+  }
+
   .sample {
+    border: 2px black solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
     background-color: rgb(255, 255, 255);
     border-radius: 1rem;
     padding: 1rem;
     cursor: pointer;
-
     transition: 0.2s;
     &:hover {
       background-color: rgb(235, 235, 235);
     }
+  }
+
+  .sample-loading-text{
+    margin: auto;
   }
 }

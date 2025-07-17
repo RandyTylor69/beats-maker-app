@@ -16,20 +16,27 @@ export default function SampleBeats(props) {
   function applySample(soundChoices, padsData) {
     props.setSoundChoices(soundChoices);
     props.setPadsData(padsData);
+    // close the window 
+    props.setIsDisplayingSample(prev=>!prev)
   }
 
   const samplesMapped = samples.map((sample, id) => (
     <div
       className="sample"
       key={id}
-      onClick={() => applySample(sample.soundChoices, sample.padsData)}
+      onClick={() => applySample(sample.soundChoices, sample.padsData)
+        
+      }
     >
       {sample.name}
     </div>
   ));
   return (
     <div className="sample-container">
-      {samples.length != 0 ? samplesMapped : <h2>Loading...</h2>}
+      <div className="sample-header">
+        <button onClick={()=>props.setIsDisplayingSample(prev=>!prev)}>&#x2715;</button>
+      </div>
+      {samples.length != 0 ? samplesMapped : <h2 className="sample-loading-text">Loading...</h2>}
     </div>
   );
 }

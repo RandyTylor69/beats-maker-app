@@ -50,6 +50,7 @@ export default function Tasks(props) {
           setPadsData={props.setPadsData}
           soundChoices={props.soundChoices}
           setSoundChoices={props.setSoundChoices}
+          setIsDisplayingSample = {setIsDisplayingSample}
         />
       )}
     </>
