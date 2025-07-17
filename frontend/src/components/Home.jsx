@@ -126,6 +126,7 @@ export default function Home() {
           soundChoices={soundChoices}
           setSoundChoices={setSoundChoices}
           updatedPadsData={updatedPadsData}
+          updatedSoundChoices={updatedSoundChoices}
         />
       </section>
       <section className="task-area">
