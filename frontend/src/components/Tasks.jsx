@@ -1,46 +1,57 @@
+import SavingWindow from "./SavingWindow";
+import SampleBeats from "./SampleBeats";
+import React from "react";
 export default function Tasks(props) {
-  // 1. Saving the beat.
-  // We're sending "soundChoices" and "padsData" to the server.
-
-  async function saveBeat() {
-    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/save`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        soundChoices: props.updatedSoundChoices,
-        padsData: props.updatedPadsData,
-      }),
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      console.error("Error saving beat: " + data.message);
-      return;
-    }
-    console.log(data);
-  }
+  const [isSaving, setIsSaving] = React.useState(false);
+  const [isDisplayingSample, setIsDisplayingSample] = React.useState(false);
 
   // 2. Accessing all beats.
   return (
-    <section className="tasks-container">
-      <button className="small-button" onClick={saveBeat}>
-        Save New
-      </button>
-      <button className="small-button">My Beats</button>
-      <form className="slider-form" onSubmit={(e) => props.toggleStart(e)}>
-        <input
-        title="change the speed"
-          name="slider"
-          type="range"
-          min="0"
-          max="100"
-          value={props.tempo}
-          onChange={(e) => props.setTempo(e.target.value)}
-          className="slider"
-        ></input>
-        <button className="big-button" type="submit">
-          {props.isStart ? "Pause" : "Start"}
+    <>
+      <section className="tasks-container">
+        <button
+          className="small-button"
+          onClick={() => setIsDisplayingSample((prev) => !prev)}
+        >
+          Sample Beats
         </button>
-      </form>
-    </section>
+        <button
+          className="small-button"
+          onClick={() => setIsSaving((prev) => !prev)}
+        >
+          Save Beat CHANGE LATER
+        </button>
+        <form className="slider-form" onSubmit={(e) => props.toggleStart(e)}>
+          <input
+            title="change the speed"
+            name="slider"
+            type="range"
+            min="0"
+            max="100"
+            value={props.tempo}
+            onChange={(e) => props.setTempo(e.target.value)}
+            className="slider"
+          ></input>
+          <button className="big-button" type="submit">
+            {props.isStart ? "Pause" : "Start"}
+          </button>
+        </form>
+      </section>
+
+      {isSaving && (
+        <SavingWindow
+          soundChoices={props.updatedSoundChoices}
+          padsData={props.updatedPadsData}
+        />
+      )}
+      {isDisplayingSample && (
+        <SampleBeats
+          padsData={props.padsData}
+          setPadsData={props.setPadsData}
+          soundChoices={props.soundChoices}
+          setSoundChoices={props.setSoundChoices}
+        />
+      )}
+    </>
   );
 }

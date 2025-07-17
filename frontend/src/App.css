@@ -254,4 +254,35 @@ body {
 }
 .tasks-container .small-button:hover {
   text-decoration-color: black;
+}
+
+.savingWindow {
+  height: 20rem;
+  width: 20rem;
+}
+.savingWindow form button {
+  width: 2rem;
+  height: 2rem;
+}
+
+.sample-container {
+  margin-top: 2rem;
+  margin-left: 5rem;
+  width: 40rem;
+  border-radius: 2rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  font-family: "Inter", sans-serif;
+}
+.sample-container .sample {
+  background-color: rgb(255, 255, 255);
+  border-radius: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.sample-container .sample:hover {
+  background-color: rgb(235, 235, 235);
 }/*# sourceMappingURL=App.css.map */

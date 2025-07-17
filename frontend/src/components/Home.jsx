@@ -7,9 +7,9 @@ import { pads } from "../data";
 export default function Home() {
   // vars for Tasks.jsx
   const [isStart, setIsStart] = React.useState(false);
-  const [tempo, setTempo] = React.useState(80);
+  const [tempo, setTempo] = React.useState(50);
   const [soundChoices, setSoundChoices] = React.useState({
-    hihat: "hihat-open",
+    hihat: "hihat-closed",
     snare: "snare-acoustic",
     kick: "kick-clear",
   });
@@ -114,7 +114,6 @@ export default function Home() {
       timeouts.current.length = 0;
     }
   }, [isStart]);
-
   // ----------------------------------------
 
   return (
@@ -138,6 +137,9 @@ export default function Home() {
         />
         <Tasks
           padsData={padsData}
+          setPadsData={setPadsData}
+          soundChoices={soundChoices}
+          setSoundChoices={setSoundChoices}
           toggleStart={toggleStart}
           tempo={tempo}
           setTempo={setTempo}
