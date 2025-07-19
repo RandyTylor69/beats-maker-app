@@ -1,342 +1,48 @@
+// pad structure: 16 hh - 16 hh - 16 snare - 16 kick
+var pads = [];
+function populatePads(){
+  var idNum = 1;
+  while(idNum<=16){
+    pads.push({
+      id: idNum,
+      type:"hihat1",
+      on:false,
+      color:"#606c38",
+      scale:1
+    })
+    idNum++
+  }
+  while(idNum<=32){
+    pads.push({
+      id: idNum,
+      type:"hihat2",
+      on:false,
+      color:"#283618",
+      scale:1
+    })
+     idNum++
+  }
+  while(idNum<=48){
+    pads.push({
+      id: idNum,
+      type:"snare",
+      on:false,
+      color:"#783017ff",
+      scale:1
+    })
+     idNum++
+  }
+  while(idNum<=64){
+    pads.push({
+      id: idNum,
+      type:"kick",
+      on:false,
+      color:"#023047",
+      scale:1
+    })
+     idNum++
+  }
+}
+populatePads()
 
-
-export const pads = [
-  {
-    id: 1,
-    type: "hihat",
-    on: false,
-    color: "#D2722D",
-    scale: 1,
-  },
-  {
-    id: 2,
-    type: "hihat",
-    on: false,
-    color: "#D2722D",
-    scale: 1,
-  },
-  {
-    id: 3,
-    type: "hihat",
-    on: false,
-    color: "#D2722D",
-    scale: 1,
-  },
-  {
-    id: 4,
-    type: "hihat",
-    on: false,
-    color: "#D2722D",
-    scale: 1,
-  },
-  {
-    id: 5,
-    type: "hihat",
-    on: false,
-    color: "#D2722D",
-    scale: 1,
-  },
-  {
-    id: 6,
-    type: "hihat",
-    on: false,
-    color: "#D2722D",
-    scale: 1,
-  },
-  {
-    id: 7,
-    type: "hihat",
-    on: false,
-    color: "#D2722D",
-    scale: 1,
-  },
-  {
-    id: 8,
-    type: "hihat",
-    on: false,
-    color: "#D2722D",
-    scale: 1,
-  },
-    {
-    id: 9,
-    type: "hihat",
-    on: false,
-    color: "#D2722D",
-    scale: 1,
-  },
-  {
-    id: 10,
-    type: "hihat",
-    on: false,
-    color: "#D2722D",
-    scale: 1,
-  },
-  {
-    id:11,
-    type: "hihat",
-    on: false,
-    color: "#D2722D",
-    scale: 1,
-  },
-  {
-    id: 12,
-    type: "hihat",
-    on: false,
-    color: "#D2722D",
-    scale: 1,
-  },
-  {
-    id:13,
-    type: "hihat",
-    on: false,
-    color: "#D2722D",
-    scale: 1,
-  },
-  {
-    id: 14,
-    type: "hihat",
-    on: false,
-    color: "#D2722D",
-    scale: 1,
-  },
-  {
-    id: 15,
-    type: "hihat",
-    on: false,
-    color: "#D2722D",
-    scale: 1,
-  },
-  {
-    id: 16,
-    type: "hihat",
-    on: false,
-    color: "#D2722D",
-    scale: 1,
-  },
-  {
-    id: 17,
-    type: "snare",
-    on: false,
-    color: "#5E1C06",
-    scale: 1,
-  },
-  {
-    id: 18,
-    type: "snare",
-    on: false,
-    color: "#5E1C06",
-    scale: 1,
-  },
-  {
-    id: 19,
-    type: "snare",
-    on: false,
-    color: "#5E1C06",
-    scale: 1,
-  },
-  {
-    id: 20,
-    type: "snare",
-    on: false,
-    color: "#5E1C06",
-    scale: 1,
-  },
-  {
-    id: 21,
-    type: "snare",
-    on: false,
-    color: "#5E1C06",
-    scale: 1,
-  },
-  {
-    id: 22,
-    type: "snare",
-    on: false,
-    color: "#5E1C06",
-    scale: 1,
-  },
-  {
-    id: 23,
-    type: "snare",
-    on: false,
-    color: "#5E1C06",
-    scale: 1,
-  },
-  {
-    id: 24,
-    type: "snare",
-    on: false,
-    color: "#5E1C06",
-    scale: 1,
-  },
-  {
-    id:25,
-    type: "snare",
-    on: false,
-    color: "#5E1C06",
-    scale: 1,
-  },
-  {
-    id: 26,
-    type: "snare",
-    on: false,
-    color: "#5E1C06",
-    scale: 1,
-  },
-  {
-    id: 27,
-    type: "snare",
-    on: false,
-    color: "#5E1C06",
-    scale: 1,
-  },
-  {
-    id: 28,
-    type: "snare",
-    on: false,
-    color: "#5E1C06",
-    scale: 1,
-  },
-  {
-    id: 29,
-    type: "snare",
-    on: false,
-    color: "#5E1C06",
-    scale: 1,
-  },
-  {
-    id: 30,
-    type: "snare",
-    on: false,
-    color: "#5E1C06",
-    scale: 1,
-  },
-  {
-    id: 31,
-    type: "snare",
-    on: false,
-    color: "#5E1C06",
-    scale: 1,
-  },
-  {
-    id: 32,
-    type: "snare",
-    on: false,
-    color: "#5E1C06",
-    scale: 1,
-  },
-  {
-    id:33,
-    type: "kick",
-    on: false,
-    color: "#274C75",
-    scale: 1,
-  },
-  {
-    id: 34,
-    type: "kick",
-    on: false,
-    color: "#274C75",
-    scale: 1,
-  },
-  {
-    id: 35,
-    type: "kick",
-    on: false,
-    color: "#274C75",
-    scale: 1,
-  },
-  {
-    id: 36,
-    type: "kick",
-    on: false,
-    color: "#274C75",
-    scale: 1,
-  },
-  {
-    id: 37,
-    type: "kick",
-    on: false,
-    color: "#274C75",
-    scale: 1,
-  },
-  {
-    id: 38,
-    type: "kick",
-    on: false,
-    color: "#274C75",
-    scale: 1,
-  },
-  {
-    id: 39,
-    type: "kick",
-    on: false,
-    color: "#274C75",
-    scale: 1,
-  },
-  {
-    id: 40,
-    type: "kick",
-    on: false,
-    color: "#274C75",
-    scale: 1,
-  }, {
-    id:41,
-    type: "kick",
-    on: false,
-    color: "#274C75",
-    scale: 1,
-  },
-  {
-    id:42,
-    type: "kick",
-    on: false,
-    color: "#274C75",
-    scale: 1,
-  },
-  {
-    id: 43,
-    type: "kick",
-    on: false,
-    color: "#274C75",
-    scale: 1,
-  },
-  {
-    id: 44,
-    type: "kick",
-    on: false,
-    color: "#274C75",
-    scale: 1,
-  },
-  {
-    id: 45,
-    type: "kick",
-    on: false,
-    color: "#274C75",
-    scale: 1,
-  },
-  {
-    id: 46,
-    type: "kick",
-    on: false,
-    color: "#274C75",
-    scale: 1,
-  },
-  {
-    id:47,
-    type: "kick",
-    on: false,
-    color: "#274C75",
-    scale: 1,
-  },
-  {
-    id: 48,
-    type: "kick",
-    on: false,
-    color: "#274C75",
-    scale: 1,
-  },
-  
-];
-
-
+export default pads;

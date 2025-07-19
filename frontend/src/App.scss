@@ -56,9 +56,9 @@ body {
 
       .pads-description {
         display: grid;
-        grid-template-rows: repeat(3, 1fr);
+        grid-template-rows: repeat(4, 1fr);
         gap: 2rem;
-        height: 17rem;
+        height: 24rem;
         border-right: 0.3rem solid black;
         padding: 0rem 1.2rem;
         .dropdown-wrapper {

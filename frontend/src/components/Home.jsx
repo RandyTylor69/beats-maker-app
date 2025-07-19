@@ -2,16 +2,43 @@ import Pads from "./Pads";
 import Tasks from "./Tasks";
 import Keyboard from "./Keyboard";
 import React from "react";
-import { pads } from "../data";
+import  pads  from "../data";
 
 export default function Home() {
+  const [hihats1, setHihats1] = React.useState([
+    { label: "hihat1-open", value: "hihat1-open", type: "hihat" },
+    { label: "hihat1-closed", value: "hihat1-closed", type: "hihat" },
+    { label: "hihat1-accent", value: "hihat1-accent", type: "hihat" },
+    { label: "hihat1-chick", value: "hihat1-chick", type: "hihat" },
+  ]);
+  const [hihats2, setHihats2] = React.useState([
+    { label: "hihat2-closed", value: "hihat2-closed", type: "hihat" },
+    { label: "hihat2-open", value: "hihat2-open", type: "hihat" },
+    { label: "hihat2-accent", value: "hihat2-accent", type: "hihat" },
+    { label: "hihat2-chick", value: "hihat2-chick", type: "hihat" },
+  ]);
+  const [snares, setSnares] = React.useState([
+    { label: "snare-acoustic", value: "snare-acoustic", type: "snare" },
+    { label: "snare-power", value: "snare-power", type: "snare" },
+    { label: "snare-rim", value: "snare-rim", type: "snare" },
+    { label: "snare-rock", value: "snare-rock", type: "snare" },
+  ]);
+  const [kicks, setKicks] = React.useState([
+    { label: "kick-clear", value: "kick-clear", type: "kick" },
+    { label: "kick-house", value: "kick-house", type: "kick" },
+    { label: "kick-rifle", value: "kick-rifle", type: "kick" },
+    { label: "kick-synth", value: "kick-synth", type: "kick" },
+    { label: "kick-swedish", value: "kick-swedish", type: "kick" },
+  ]);
+
   // vars for Tasks.jsx
   const [isStart, setIsStart] = React.useState(false);
   const [tempo, setTempo] = React.useState(50);
   const [soundChoices, setSoundChoices] = React.useState({
-    hihat: "hihat-closed",
-    snare: "snare-acoustic",
-    kick: "kick-clear",
+    hihat1: hihats1[0].value,
+    hihat2: hihats2[0].value,
+    snare: snares[0].value,
+    kick: kicks[0].value,
   });
   const updatedSoundChoices = React.useRef(null);
   updatedSoundChoices.current = soundChoices;
@@ -33,14 +60,7 @@ export default function Home() {
     setIsStart((prev) => !prev);
   }
 
-  // Since no real music producer will use this app,
-  // the tempo shown here is purely imaginative.
 
-  // a medium tempo of 50 represents 200ms of delay.
-  
-
-  
-  const delay = 1000/(tempo/10)
 
   function makeSound(pad) {
     const sound = new Audio(
@@ -48,6 +68,8 @@ export default function Home() {
     );
     sound.play();
   }
+
+  console.log(updatedSoundChoices.current)
 
   function activate(pad) {
     // 1. enlarge the pad size
@@ -77,12 +99,14 @@ export default function Home() {
     const arr1 = array.slice(0, 16);
     const arr2 = array.slice(16, 32);
     const arr3 = array.slice(32, 48);
-    return [arr1, arr2, arr3];
+    const arr4 = array.slice(48, 64);
+    return [arr1, arr2, arr3, arr4];
   }
 
-  // -----
+  // the tempo shown here is purely imaginative.
+  // a medium tempo of 50 represents 200ms of delay.
 
-  // -----
+  const delay = 1000 / (tempo / 10);
 
   function looping(array) {
     // 1. Starting from each of the 3 sliced arrays
@@ -125,8 +149,16 @@ export default function Home() {
           isStart={isStart}
           soundChoices={soundChoices}
           setSoundChoices={setSoundChoices}
-          updatedPadsData={updatedPadsData}
-          updatedSoundChoices={updatedSoundChoices}
+          updatedSoundChoices={updatedSoundChoices.current}
+          // for the instrument choices
+          hihats1={hihats1}
+          setHihats1={setHihats1}
+          hihats2={hihats2}
+          setHihats2={setHihats2}
+          snares={snares}
+          setSnares={setSnares}
+          kicks={kicks}
+          setKicksc={setKicks}
         />
       </section>
       <section className="task-area">
@@ -150,8 +182,17 @@ export default function Home() {
           openKeyPositions={openKeyPositions}
           setOpenKeyPositions={setOpenKeyPositions}
           // for the server
-          updatedSoundChoices = {updatedSoundChoices.current}
-          updatedPadsData = {updatedPadsData.current}
+          updatedSoundChoices={updatedSoundChoices.current}
+          updatedPadsData={updatedPadsData.current}
+          // for the instrument choices
+          hihats1={hihats1}
+          setHihats1={setHihats1}
+          hihats2={hihats2}
+          setHihats2={setHihats2}
+          snares={snares}
+          setSnares={setSnares}
+          kicks={kicks}
+          setKicksc={setKicks}
         />
       </section>
     </div>

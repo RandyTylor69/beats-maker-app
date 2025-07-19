@@ -50,7 +50,17 @@ export default function Tasks(props) {
           setPadsData={props.setPadsData}
           soundChoices={props.soundChoices}
           setSoundChoices={props.setSoundChoices}
-          setIsDisplayingSample = {setIsDisplayingSample}
+          setIsDisplayingSample={setIsDisplayingSample}
+          updatedSoundChoices = {props.updatedSoundChocies}
+          // for the instrument choices
+          hihats1={props.hihats1}
+          setHihats1={props.setHihats1}
+          hihats2={props.hihats2}
+          setHihats2={props.setHihats2}
+          snares={props.snares}
+          setSnares={props.setSnares}
+          kicks={props.kicks}
+          setKicksc={props.setKicks}
         />
       )}
     </>
