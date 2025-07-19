@@ -69,8 +69,6 @@ export default function Home() {
     sound.play();
   }
 
-  console.log(updatedSoundChoices.current)
-
   function activate(pad) {
     // 1. enlarge the pad size
     setPadsData((prev) =>
@@ -192,7 +190,7 @@ export default function Home() {
           snares={snares}
           setSnares={setSnares}
           kicks={kicks}
-          setKicksc={setKicks}
+          setKicks={setKicks}
         />
       </section>
     </div>

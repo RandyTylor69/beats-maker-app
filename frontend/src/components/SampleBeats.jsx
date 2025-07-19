@@ -20,12 +20,12 @@ export default function SampleBeats(props) {
 
     // removing the target sound from its position
     const targetIndex = arr.indexOf(target);
-
     setArr((prev) => {
       prev.splice(targetIndex, 1);
       return prev;
     });
 
+    // adding the target sound to the front of the array.
     setArr((prev) => [target, ...prev]);
   }
 
@@ -33,10 +33,10 @@ export default function SampleBeats(props) {
     props.setSoundChoices(soundChoices);
     props.setPadsData(padsData);
 
-    shiftSoundHelper(props.hihats1, props.setHihats1, props.updatedSoundChoices.hihat1)
-    shiftSoundHelper(props.hihats2, props.setHihats2, props.updatedSoundChoices.hihat2)
-    shiftSoundHelper(props.snares, props.setSnares, props.updatedSoundChoices.snare)
-    shiftSoundHelper(props.kicks, props.setKick, props.updatedSoundChoices.kick)
+    shiftSoundHelper(props.hihats1, props.setHihats1, soundChoices.hihat1);
+    shiftSoundHelper(props.hihats2, props.setHihats2, soundChoices.hihat2);
+    shiftSoundHelper(props.snares, props.setSnares, soundChoices.snare);
+    shiftSoundHelper(props.kicks, props.setKicks, soundChoices.kick);
 
     // close the window
     props.setIsDisplayingSample((prev) => !prev);
@@ -53,6 +53,8 @@ export default function SampleBeats(props) {
       {sample.name}
     </div>
   ));
+
+
   return (
     <div className="sample-container">
       <div className="sample-header">
