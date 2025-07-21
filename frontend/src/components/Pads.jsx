@@ -13,6 +13,7 @@ export default function Pads(props) {
         scale={pad.scale}
         activate={props.activate}
         setPadsData={props.setPadsData}
+        makeSound = {()=>props.makeSound(pad)}
       />
     );
   });

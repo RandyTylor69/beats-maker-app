@@ -1,6 +1,18 @@
 import SavingWindow from "./SavingWindow";
 import SampleBeats from "./SampleBeats";
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faVolumeHigh,
+  faTrash,
+  faDownload,
+  faUpload,
+  faVial,
+} from "@fortawesome/free-solid-svg-icons";
+
+// The layout of all utilities of the Tasks.jsx component
+// is found after this export function.
+
 export default function Tasks(props) {
   const [isSaving, setIsSaving] = React.useState(false);
   const [isDisplayingSample, setIsDisplayingSample] = React.useState(false);
@@ -9,33 +21,67 @@ export default function Tasks(props) {
   return (
     <>
       <section className="tasks-container">
-        <button
-          className="small-button"
-          onClick={() => setIsDisplayingSample((prev) => !prev)}
-        >
-          Sample Beats
-        </button>
-        <button
-          className="small-button"
-          onClick={() => setIsSaving((prev) => !prev)}
-        >
-          Save Beat CHANGE LATER
-        </button>
-        <form className="slider-form" onSubmit={(e) => props.toggleStart(e)}>
-          <input
-            title="change the speed"
-            name="slider"
-            type="range"
-            min="0"
-            max="100"
-            value={props.tempo}
-            onChange={(e) => props.setTempo(e.target.value)}
-            className="slider"
-          ></input>
-          <button className="big-button" type="submit">
-            {props.isStart ? "Pause" : "Start"}
+        {/* ___________________ GROUP 1 _____________________**/}
+        <div className="task-group-1">
+          <form className="group-1-form">
+            <FontAwesomeIcon icon={faVolumeHigh} />
+            <input
+              title="change the speed"
+              name="slider"
+              type="range"
+              min="0"
+              max="100"
+              defaultValue={props.masterVolume.current}
+              onChange={(e) => 
+                props.gainNode.gain.value = parseFloat(e.target.value)
+              }
+              className="slider"
+            />
+          </form>
+          <form className="group-1-form">
+            <p>Tempo</p>
+            <input
+              className="tempo-input"
+              name="tempoInput"
+              type="number"
+              value={props.tempo}
+            />
+          </form>
+          <button className="small-button">Display Piano</button>
+        </div>
+        {/* ___________________ GROUP 2 _____________________**/}
+        <div className="task-group-2">
+          <button
+            className="small-button"
+            onClick={() => setIsDisplayingSample((prev) => !prev)}
+          >
+            <FontAwesomeIcon icon={faVial} />
+            Samples
           </button>
-        </form>
+          <div className="group-2-save-open-container">
+            <button className="small-button">
+              {" "}
+              <FontAwesomeIcon icon={faDownload} />
+              Save
+            </button>
+            <button className="small-button">
+              <FontAwesomeIcon icon={faUpload} />
+              Open
+            </button>
+          </div>
+
+          <button className="small-button">
+            <FontAwesomeIcon icon={faTrash} />
+            Clean
+          </button>
+        </div>
+        {/* ___________________ GROUP 3 _____________________**/}
+        <div className="task-group-3">
+             <button className="big-button" onClick={props.toggleStart}>
+          {props.isStart ? "Pause" : "Start"}
+        </button>
+        </div>
+     
       </section>
 
       {isSaving && (
@@ -51,7 +97,7 @@ export default function Tasks(props) {
           soundChoices={props.soundChoices}
           setSoundChoices={props.setSoundChoices}
           setIsDisplayingSample={setIsDisplayingSample}
-          updatedSoundChoices = {props.updatedSoundChoices}
+          updatedSoundChoices={props.updatedSoundChoices}
           // for the instrument choices
           hihats1={props.hihats1}
           setHihats1={props.setHihats1}
@@ -66,3 +112,18 @@ export default function Tasks(props) {
     </>
   );
 }
+
+// Utilities Layout
+
+// -----O-- master volume     |     Sample Beats   |
+//     [60] tempo             |     Clear All      |       Start
+//     [X]  show piano        |     Save / Open    |
+
+// SAVE BUTTON (COPY PASTE AND IT WORKS)
+
+/*         <button
+          className="small-button"
+          onClick={() => setIsSaving((prev) => !prev)}
+        >
+          Save Beat CHANGE LATER
+        </button>                                            */

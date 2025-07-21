@@ -194,21 +194,11 @@ body {
   display: flex;
   font-family: "Inter", sans-serif;
   color: black;
-  gap: 1rem;
-  width: 45rem;
-  justify-content: space-between;
-  padding-left: 5rem;
+  width: 40.5rem;
+  margin-left: 6rem;
   display: flex;
 }
-.tasks-container .slider-form {
-  margin: 0.8rem 0;
-  display: flex;
-  gap: 5rem;
-  width: 20rem;
-  justify-content: center;
-  align-items: center;
-}
-.tasks-container .slider-form .big-button {
+.tasks-container .big-button {
   font-family: "Inter", sans-serif;
   background: none;
   border: none;
@@ -219,18 +209,50 @@ body {
   text-align: left;
   transition: 0.3s;
 }
-.tasks-container .slider-form .big-button:hover {
+.tasks-container .big-button:hover {
   scale: 1.2;
 }
-.tasks-container .slider-form .slider {
+.tasks-container .small-button {
+  display: flex;
+  gap: 0.2rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  background: none;
+  border-radius: 1rem;
+  border: 2px solid black;
+  padding: 0.3rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.tasks-container .small-button:hover {
+  background-color: black;
+  color: #ddceb5;
+}
+.tasks-container .task-group-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-right: 2px solid black;
+  gap: 0.8rem;
+  width: 15rem;
+}
+.tasks-container .task-group-1 .group-1-form {
+  display: flex;
+  gap: 1rem;
+  width: 20rem;
+  justify-content: center;
+  align-items: center;
+}
+.tasks-container .task-group-1 .group-1-form .slider {
   -webkit-appearance: none;
   -moz-appearance: none;
        appearance: none;
   background-color: black;
   height: 0.2rem;
 }
-.tasks-container .slider-form .slider::-moz-range-thumb,
-.tasks-container .slider-form .slider ::-webkit-range-thumb {
+.tasks-container .task-group-1 .group-1-form .slider::-moz-range-thumb,
+.tasks-container .task-group-1 .group-1-form .slider ::-webkit-range-thumb {
   -webkit-appearance: black;
   cursor: pointer;
   background: black;
@@ -239,21 +261,46 @@ body {
   height: 1rem;
   border-radius: 50%;
 }
-.tasks-container .small-button {
-  background: none;
+.tasks-container .task-group-1 .group-1-form .tempo-input {
+  border: 2px solid black;
   font-family: "Inter", sans-serif;
-  width: -moz-fit-content;
-  width: fit-content;
-  border: none;
-  font-size: 1rem;
-  font-weight: 300;
-  cursor: pointer;
-  transition: 0.3s;
-  text-decoration: underline;
-  text-decoration-color: transparent;
+  width: 4rem;
 }
-.tasks-container .small-button:hover {
-  text-decoration-color: black;
+.tasks-container .task-group-1 .group-1-form .tempo-input:focus {
+  outline: none;
+}
+.tasks-container .task-group-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-right: 2px solid black;
+  gap: 0.8rem;
+  width: 15rem;
+}
+.tasks-container .task-group-2 .group-2-save-open-container {
+  display: flex;
+  gap: 0.8rem;
+}
+.tasks-container .task-group-2 .group-2-save-open-container button {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  background: none;
+  border-radius: 1rem;
+  border: 2px solid black;
+  width: 4rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.tasks-container .task-group-2 .group-2-save-open-container button:hover {
+  background-color: black;
+  color: #ddceb5;
+}
+.tasks-container .task-group-3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 4rem;
 }
 
 .savingWindow {

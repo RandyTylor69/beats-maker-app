@@ -4,7 +4,11 @@ import Keyboard from "./Keyboard";
 import React from "react";
 import  pads  from "../data";
 
+// All components family tree is found by the end of this component.
+// Find it by minimizing the Home() function below. 
+
 export default function Home() {
+  // All available instruments and their variations
   const [hihats1, setHihats1] = React.useState([
     { label: "hihat1-open", value: "hihat1-open", type: "hihat" },
     { label: "hihat1-closed", value: "hihat1-closed", type: "hihat" },
@@ -32,7 +36,7 @@ export default function Home() {
   ]);
 
   // vars for Tasks.jsx
-  const [isStart, setIsStart] = React.useState(false);
+  const [isStart, setIsStart] = React.useState(false); // by the start / pause button
   const [tempo, setTempo] = React.useState(50);
   const [soundChoices, setSoundChoices] = React.useState({
     hihat1: hihats1[0].value,
@@ -44,6 +48,11 @@ export default function Home() {
   updatedSoundChoices.current = soundChoices;
   const [keyboardChoice, setKeyboardChoice] = React.useState("bass");
   const [openKeyPositions, setOpenKeyPositions] = React.useState(true);
+  //          --- working with the master volume
+  const audioCtx = new AudioContext(window.AudioContext);
+  const gainNode = audioCtx.createGain();
+  gainNode.connect(audioCtx.destination)
+  const masterVolume = React.useRef(70)
 
   // vars for Pads.jssx
   const [padsData, setPadsData] = React.useState(pads);
@@ -60,12 +69,13 @@ export default function Home() {
     setIsStart((prev) => !prev);
   }
 
-
-
+  // creating sound objects and play them
   function makeSound(pad) {
     const sound = new Audio(
       `/sounds/${updatedSoundChoices.current[pad.type]}.wav`
     );
+    const track = audioCtx.createMediaElementSource(sound)
+    track.connect(gainNode)
     sound.play();
   }
 
@@ -148,6 +158,7 @@ export default function Home() {
           soundChoices={soundChoices}
           setSoundChoices={setSoundChoices}
           updatedSoundChoices={updatedSoundChoices.current}
+          makeSound={makeSound}
           // for the instrument choices
           hihats1={hihats1}
           setHihats1={setHihats1}
@@ -179,6 +190,8 @@ export default function Home() {
           setKeyboardChoice={setKeyboardChoice}
           openKeyPositions={openKeyPositions}
           setOpenKeyPositions={setOpenKeyPositions}
+          masterVolume = {masterVolume}
+          gainNode = {gainNode}
           // for the server
           updatedSoundChoices={updatedSoundChoices.current}
           updatedPadsData={updatedPadsData.current}
@@ -196,3 +209,11 @@ export default function Home() {
     </div>
   );
 }
+
+//          All components family tree
+
+//                    Home      Header(independent from Home.jsx)
+//                     |          
+//     Pads ------ Keyboard ------ Tasks
+//      |                            |
+//     Pad         SavingWindow ---------- SampleBeats
