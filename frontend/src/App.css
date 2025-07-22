@@ -285,19 +285,25 @@ body {
   display: flex;
   gap: 0.8rem;
 }
-.tasks-container .task-group-2 .group-2-save-open-container button {
+.tasks-container .task-group-2 .group-2-save-open-container a {
   font-family: "Inter", sans-serif;
   font-weight: 500;
   background: none;
+  font-size: 14px;
   border-radius: 1rem;
   border: 2px solid black;
-  width: 4rem;
+  width: 4.2rem;
   cursor: pointer;
   transition: 0.2s;
+  color: black;
+  text-decoration: none;
 }
-.tasks-container .task-group-2 .group-2-save-open-container button:hover {
+.tasks-container .task-group-2 .group-2-save-open-container a:hover {
   background-color: black;
   color: #ddceb5;
+}
+.tasks-container .task-group-2 .group-2-save-open-container .upload-file-input {
+  display: none;
 }
 .tasks-container .task-group-3 {
   display: flex;

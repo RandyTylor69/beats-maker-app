@@ -158,8 +158,7 @@ export default function Home() {
     }
   }, [isStart]);
 
-  console.log(isDisplayingPiano)
-  // ----------------------------------------
+ // ----------------------------------------
 
   return (
     <div className="web-body">
@@ -185,6 +184,7 @@ export default function Home() {
       </section>
       <section className="task-area">
        {isDisplayingPiano &&  <Keyboard
+       isDisplayingPiano={isDisplayingPiano}
           keyboardChoice={keyboardChoice}
           setKeyboardChoice={setKeyboardChoice}
           openKeyPositions={openKeyPositions}

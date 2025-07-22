@@ -31,43 +31,47 @@ export default function Keyboard(props) {
   // Populating the keySounds object.
   useEffect(() => {
     for (let key of keyNotes) {
-      keySounds.current[key] = new Audio(
-        `piano-notes/${key}.wav`
-      );
+      keySounds.current[key] = new Audio(`piano-notes/${key}.wav`);
     }
   }, [props.keyboardChoice]);
 
+  function playUsingKeyboard(e) {
+    // getting the key being pressed
+    const key = e.key;
+
+    // white keys:
+    if (key === "q") playKey("f0");
+    else if (key === "w") playKey("g0");
+    else if (key === "e") playKey("a1");
+    else if (key === "r") playKey("b1");
+    else if (key === "t") playKey("c1");
+    else if (key === "y") playKey("d1");
+    else if (key === "u") playKey("e1");
+    else if (key === "i") playKey("f1");
+    else if (key === "o") playKey("g1");
+    else if (key === "p") playKey("a2");
+    else if (key === "[") playKey("b2");
+    // black keys:
+    else if (key === "2") playKey("f0s");
+    else if (key === "3") playKey("g0s");
+    else if (key === "4") playKey("a1s");
+    else if (key === "6") playKey("c1s");
+    else if (key === "7") playKey("d1s");
+    else if (key === "9") playKey("f1s");
+    else if (key === "0") playKey("g1s");
+    else if (key === "-") playKey("a2s");
+  }
+
   // detect key press if the user wishes to play the keyboard by using the keyboard.
+
   useEffect(() => {
-    document.addEventListener("keydown", (e) => {
-      // getting the key being pressed
-      const key = e.key;
-
-      // white keys:
-      if (key === "q") playKey("f0");
-      else if (key === "w") playKey("g0");
-      else if (key === "e") playKey("a1");
-      else if (key === "r") playKey("b1");
-      else if (key === "t") playKey("c1");
-      else if (key === "y") playKey("d1");
-      else if (key === "u") playKey("e1");
-      else if (key === "i") playKey("f1");
-      else if (key === "o") playKey("g1");
-      else if (key === "p") playKey("a2");
-      else if (key === "[") playKey("b2");
-
-      // black keys:
-      else if (key==="2") playKey("f0s");
-      else if (key==="3") playKey("g0s");
-      else if (key==="4") playKey("a1s");
-      else if (key==="6") playKey("c1s");
-      else if (key==="7") playKey("d1s");
-      else if (key==="9") playKey("f1s");
-      else if (key==="0") playKey("g1s");
-      else if (key==="-") playKey("a2s");
-      
-    });
-  }, []);
+    if (props.isDisplayingPiano) {
+      // creates a "playingUsingKeyboard" instance.
+      document.addEventListener("keydown", playUsingKeyboard);
+    } else return;
+    // clean-up function that removes the previous "playingUsingKeyboard" instance.
+    return () => document.removeEventListener("keydown", playUsingKeyboard);
+  }, [props.isDisplayingPiano]);
 
   function playKey(key) {
     const sound = keySounds.current[key];
@@ -75,11 +79,9 @@ export default function Keyboard(props) {
     sound.play();
   }
 
-
   // a2, a2s, b2
   return (
     <div className="keyboard-container">
-
       <section className="keyboard">
         <div className="white-key-container">
           <button className="white-key" onClick={() => playKey("f0")}>
