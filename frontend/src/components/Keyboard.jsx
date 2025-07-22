@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
 export default function Keyboard(props) {
-  const keyboardOptions = ["bass", "piano"];
   const keySounds = useRef({}); // intentionally left empty
   const keyNotes = [
     "f0",
@@ -34,7 +32,7 @@ export default function Keyboard(props) {
   useEffect(() => {
     for (let key of keyNotes) {
       keySounds.current[key] = new Audio(
-        `${props.keyboardChoice}-notes/${key}.wav`
+        `piano-notes/${key}.wav`
       );
     }
   }, [props.keyboardChoice]);
@@ -77,23 +75,10 @@ export default function Keyboard(props) {
     sound.play();
   }
 
-  // for the key sound options
-
-  const keyboardOptionsMapped = keyboardOptions.map((opt, id) => {
-    return <option className="dropdown-option" key={id}>{opt}</option>;
-  });
-
-  function submitDropdown(e) {
-    props.setKeyboardChoice(e.target.value);
-  }
-
 
   // a2, a2s, b2
   return (
     <div className="keyboard-container">
-      <form className="keyboard-form" onChange={(e) => submitDropdown(e)}>
-        <select>{keyboardOptionsMapped}</select>
-      </form>
 
       <section className="keyboard">
         <div className="white-key-container">

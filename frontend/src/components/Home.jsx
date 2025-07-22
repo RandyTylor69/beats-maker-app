@@ -37,7 +37,7 @@ export default function Home() {
 
   // vars for Tasks.jsx
   const [isStart, setIsStart] = React.useState(false); // by the start / pause button
-  const [tempo, setTempo] = React.useState(50);
+  const tempo = React.useRef(140);
   const [soundChoices, setSoundChoices] = React.useState({
     hihat1: hihats1[0].value,
     hihat2: hihats2[0].value,
@@ -49,10 +49,17 @@ export default function Home() {
   const [keyboardChoice, setKeyboardChoice] = React.useState("bass");
   const [openKeyPositions, setOpenKeyPositions] = React.useState(true);
   //          --- working with the master volume
-  const audioCtx = new AudioContext(window.AudioContext);
-  const gainNode = audioCtx.createGain();
-  gainNode.connect(audioCtx.destination)
-  const masterVolume = React.useRef(70)
+  const audioCtx = React.useRef(new AudioContext(window.AudioContext))
+  const gainNode = React.useRef(audioCtx.current.createGain());
+  React.useEffect(()=>{
+    gainNode.current.connect(audioCtx.current.destination)
+  })
+  const [masterVolume, setMasterVolume] = React.useState(0)
+  React.useEffect(()=>{
+    gainNode.current.gain.value = 1 + (masterVolume / 100)
+  }, [masterVolume])
+  //           --- displaying the piano
+   const [isDisplayingPiano, setIsDisplayingPiano] = React.useState(false)
 
   // vars for Pads.jssx
   const [padsData, setPadsData] = React.useState(pads);
@@ -60,6 +67,7 @@ export default function Home() {
   updatedPadsData.current = padsData;
   const interval = React.useRef(null);
   const timeouts = React.useRef([]);
+
 
   // --- FUNCTIONS FOR TASKS.JSX
 
@@ -74,8 +82,8 @@ export default function Home() {
     const sound = new Audio(
       `/sounds/${updatedSoundChoices.current[pad.type]}.wav`
     );
-    const track = audioCtx.createMediaElementSource(sound)
-    track.connect(gainNode)
+    const track = audioCtx.current.createMediaElementSource(sound)
+    track.connect(gainNode.current)
     sound.play();
   }
 
@@ -111,10 +119,13 @@ export default function Home() {
     return [arr1, arr2, arr3, arr4];
   }
 
-  // the tempo shown here is purely imaginative.
-  // a medium tempo of 50 represents 200ms of delay.
+  // TEMPO CALCULATION
 
-  const delay = 1000 / (tempo / 10);
+  // 60000/tempo = BPM 
+
+  // ex: 120BPM would give 500ms
+
+  const delay = 30000/tempo.current
 
   function looping(array) {
     // 1. Starting from each of the 3 sliced arrays
@@ -146,6 +157,8 @@ export default function Home() {
       timeouts.current.length = 0;
     }
   }, [isStart]);
+
+  console.log(isDisplayingPiano)
   // ----------------------------------------
 
   return (
@@ -171,12 +184,12 @@ export default function Home() {
         />
       </section>
       <section className="task-area">
-        <Keyboard
+       {isDisplayingPiano &&  <Keyboard
           keyboardChoice={keyboardChoice}
           setKeyboardChoice={setKeyboardChoice}
           openKeyPositions={openKeyPositions}
           setOpenKeyPositions={setOpenKeyPositions}
-        />
+        />}
         <Tasks
           padsData={padsData}
           setPadsData={setPadsData}
@@ -184,13 +197,13 @@ export default function Home() {
           setSoundChoices={setSoundChoices}
           toggleStart={toggleStart}
           tempo={tempo}
-          setTempo={setTempo}
           isStart={isStart}
           keyboardChoice={keyboardChoice}
           setKeyboardChoice={setKeyboardChoice}
           openKeyPositions={openKeyPositions}
           setOpenKeyPositions={setOpenKeyPositions}
           masterVolume = {masterVolume}
+          setMasterVolume= {setMasterVolume}
           gainNode = {gainNode}
           // for the server
           updatedSoundChoices={updatedSoundChoices.current}
@@ -204,6 +217,7 @@ export default function Home() {
           setSnares={setSnares}
           kicks={kicks}
           setKicks={setKicks}
+          setIsDisplayingPiano= {setIsDisplayingPiano}
         />
       </section>
     </div>

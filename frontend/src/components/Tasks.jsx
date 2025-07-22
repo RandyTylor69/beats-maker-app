@@ -8,6 +8,8 @@ import {
   faDownload,
   faUpload,
   faVial,
+  faPlay,
+  faPause
 } from "@fortawesome/free-solid-svg-icons";
 
 // The layout of all utilities of the Tasks.jsx component
@@ -16,7 +18,19 @@ import {
 export default function Tasks(props) {
   const [isSaving, setIsSaving] = React.useState(false);
   const [isDisplayingSample, setIsDisplayingSample] = React.useState(false);
+  
 
+  function togglePiano(){
+    props.setIsDisplayingPiano(prev=>!prev)
+  }
+
+  function cleanAll(){
+    props.setPadsData(prev=>prev.map(pad=>{
+      return {...pad, on:false}
+    }))
+  }
+  
+  
   // 2. Accessing all beats.
   return (
     <>
@@ -29,11 +43,11 @@ export default function Tasks(props) {
               title="change the speed"
               name="slider"
               type="range"
-              min="0"
-              max="100"
+              min="-100"
+              max="200"
               defaultValue={props.masterVolume.current}
               onChange={(e) => 
-                props.gainNode.gain.value = parseFloat(e.target.value)
+                props.setMasterVolume(parseFloat(e.target.value))
               }
               className="slider"
             />
@@ -44,10 +58,13 @@ export default function Tasks(props) {
               className="tempo-input"
               name="tempoInput"
               type="number"
-              value={props.tempo}
+              defaultValue={props.tempo.current}
+              onChange={e=>props.tempo.current = parseFloat(e.target.value)}
             />
           </form>
-          <button className="small-button">Display Piano</button>
+          <button className="small-button"
+          onClick={togglePiano}
+          >Display Piano</button>
         </div>
         {/* ___________________ GROUP 2 _____________________**/}
         <div className="task-group-2">
@@ -70,7 +87,8 @@ export default function Tasks(props) {
             </button>
           </div>
 
-          <button className="small-button">
+          <button className="small-button"
+          onClick={cleanAll}>
             <FontAwesomeIcon icon={faTrash} />
             Clean
           </button>
@@ -78,7 +96,7 @@ export default function Tasks(props) {
         {/* ___________________ GROUP 3 _____________________**/}
         <div className="task-group-3">
              <button className="big-button" onClick={props.toggleStart}>
-          {props.isStart ? "Pause" : "Start"}
+          {props.isStart ? <FontAwesomeIcon icon={faPause} /> :<FontAwesomeIcon icon={faPlay} />}
         </button>
         </div>
      

@@ -1,4 +1,5 @@
-export default function Header(){
+
+export default function Header(props){
     return(
         <header className="web-header">
             <div className="title-container">
