@@ -11,7 +11,7 @@ dotenv.config();
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000", "https://beats-maker-app.vercel.app/"],
   })
 );
 app.use(express.json());
